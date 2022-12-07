@@ -6,7 +6,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3>Añadir Productos
+                <h3>Añadir Producto
                     <a href="{{ url('admin/products') }}" class="btn btn-danger btn-sm text-white float-end">Atrás</a>
                 </h3>
             </div>
@@ -43,6 +43,11 @@
                             <button class="nav-link" id="image-tab" data-bs-toggle="tab"
                                 data-bs-target="#image-tab-pane" type="button" role="tab"
                                 aria-controls="image-tab-pane" aria-selected="false">Imagen de Producto</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="color-tab" data-bs-toggle="tab"
+                                data-bs-target="#color-tab-pane" type="button" role="tab"
+                                aria-controls="image-tab-pane" aria-selected="false">Color de Producto</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -133,6 +138,30 @@
                             <div class="mb-3">
                                 <label>Subir Imagen de Producto</label>
                                 <input type="file" name="image[]" multiple class="form-control">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade border p-3" id="color-tab-pane" role="tabpanel" aria-labelledby="image-tab" tabindex="0">
+                            <div class="mb-3">
+
+                                <label>Seleccionar Color de Producto</label>
+                                <hr/>
+                                <div class="row">
+                                    @forelse ($colors as $coloritem)
+                                        <div class="col-md-3">
+                                            <div class="p-2 border mb-3">
+                                                Color: <input type="checkbox" name="colors[{{ $coloritem->id }}]" value="{{ $coloritem->id }}"> 
+                                                {{ $coloritem->name }}
+                                                <br/>
+                                                Cantidad: <input type="number" name="colorquantity[{{ $coloritem->id }}]" style="width:70px; border: 1px solid" />
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <div class="col-md-12">
+                                            <h1>No se encontraron colores</h1>
+                                        </div>
+                                    @endforelse
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
